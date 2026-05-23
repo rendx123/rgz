@@ -1,0 +1,476 @@
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: Tahoma, sans-serif;
+background: #eef2f5;
+}
+
+/* меню справа */
+.menu {
+position: fixed;
+top: 0;
+right: 0;
+width: 220px;
+height: 100vh;
+background: #0a2f6c;
+padding-top: 40px;
+}
+
+.menu ul {
+list-style: none;
+text-align: center;
+}
+
+.menu li {
+margin: 25px 0;
+}
+
+.menu a {
+color: white;
+text-decoration: none;
+font-size: 18px;
+font-weight: bold;
+display: block;
+padding: 8px;
+}
+
+.menu a:hover {
+background: #ffb81c;
+color: #0a2f6c;
+}
+
+/* контент */
+.content {
+margin-right: 240px;
+padding: 25px;
+background: white;
+min-height: 100vh;
+}
+
+/* логотип и шапка */
+.logo-block {
+text-align: center;
+margin-bottom: 35px;
+}
+
+.logo {
+width: 100px;
+margin-bottom: 15px;
+}
+
+/* блоки с информацией */
+.screen {
+margin-bottom: 45px;
+padding: 20px;
+border: 1px solid #ddd;
+border-radius: 12px;
+background: #fafafa;
+}
+
+.screen h2 {
+color: #0a2f6c;
+margin-bottom: 18px;
+font-size: 26px;
+border-left: 5px solid #ffb81c;
+padding-left: 15px;
+}
+
+.screen p {
+margin-bottom: 12px;
+line-height: 1.4;
+font-size: 16px;
+}
+
+.screen ul {
+margin: 10px 0 10px 30px;
+}
+
+.screen li {
+margin: 6px 0;
+}
+
+/* картинки внутри блоков */
+.screen img {
+width: 100%;
+max-width: 500px;
+height: auto;
+display: block;
+margin: 20px auto 0 auto;
+border-radius: 10px;
+border: 1px solid #ccc;
+}
+
+/* кнопка наверх */
+.up {
+position: fixed;
+bottom: 25px;
+right: 275px;
+background: #0a2f6c;
+color: white;
+padding: 12px 18px;
+text-decoration: none;
+border-radius: 40px;
+font-weight: bold;
+font-size: 14px;
+}
+
+.up:hover {
+background: #ffb81c;
+color: #0a2f6c;
+}
+
+.wide-img {
+width: 100%;
+max-width: 100%;
+height: auto;
+display: block;
+margin: 20px auto 0 auto;
+border-radius: 10px;
+}
+
+/* блок с руководителем (фото слева, текст справа) */
+.boss {
+display: flex;
+flex-wrap: wrap;
+gap: 25px;
+align-items: center;
+margin-top: 15px;
+}
+
+.boss-img {
+width: 180px;
+height: auto;
+border-radius: 20px;
+box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+border: 3px solid #ffb81c;
+}
+
+.boss-info {
+flex: 1;
+}
+
+
+/* 2 глава */
+.news-list {
+display: flex;
+flex-direction: column;
+gap: 25px;
+margin-top: 30px;
+}
+
+.news-card {
+border: 2px solid #ddd;
+border-radius: 20px;
+padding: 20px;
+background: #ffffff;
+box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+transition: 0.2s;
+}
+
+.news-card:hover {
+box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+border-color: #ffb81c;
+}
+
+.news-date {
+color: #ffb81c;
+font-weight: bold;
+font-size: 14px;
+margin-bottom: 8px;
+}
+
+.news-card h3 {
+color: #0a2f6c;
+margin-bottom: 12px;
+font-size: 20px;
+}
+
+.news-short p {
+margin: 0;
+color: #333;
+line-height: 1.4;
+}
+
+.news-full {
+margin-top: 15px;
+padding-top: 10px;
+border-top: 1px solid #eee;
+}
+
+.show-btn {
+margin-top: 15px;
+background: #0a2f6c;
+color: white;
+border: none;
+padding: 8px 18px;
+border-radius: 25px;
+cursor: pointer;
+font-size: 14px;
+}
+
+.show-btn:hover {
+background: #ffb81c;
+color: #0a2f6c;
+}
+
+.home {
+right: 275px;
+bottom: 85px;
+}
+/* 3. КУРС ВАЛЮТ */
+.currency-box {
+max-width: 500px;
+background: #f9f9f9;
+padding: 25px;
+border-radius: 20px;
+margin: 30px 0;
+border: 1px solid #ddd;
+box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.currency-box h2 {
+color: #0a2f6c;
+margin-bottom: 15px;
+}
+
+.currency-box label {
+display: block;
+margin-top: 15px;
+font-weight: bold;
+color: #333;
+}
+
+.currency-box input {
+width: 100%;
+padding: 10px;
+margin-top: 5px;
+border: 1px solid #ccc;
+border-radius: 10px;
+font-size: 16px;
+box-sizing: border-box;
+}
+
+.rate-info {
+background: #0a2f6c;
+color: white;
+padding: 12px;
+border-radius: 12px;
+text-align: center;
+font-size: 18px;
+font-weight: bold;
+margin-bottom: 20px;
+}
+
+
+/* График */
+.chart {
+display: flex;
+flex-direction: row;
+align-items: flex-end;
+justify-content: center;
+gap: 6px;
+margin-top: 30px;
+min-height: 220px;
+}
+
+.bar {
+width: 35px;
+background-color: #0a2f6c;
+color: white;
+font-size: 11px;
+text-align: center;
+border-radius: 8px 8px 0 0;
+transition: 0.2s;
+cursor: pointer;
+padding-top: 5px;
+}
+
+.bar:hover {
+background-color: #ffb81c;
+transform: scale(1.05);
+}
+
+.bar.selected {
+background-color: #ffb81c;
+color: #0a2f6c;
+box-shadow: 0 0 8px #ffb81c;
+}
+
+.chart-tooltip {
+margin-top: 20px;
+padding: 10px;
+background: #f0f0f0;
+border-radius: 12px;
+text-align: center;
+font-size: 14px;
+border-left: 4px solid #ffb81c;
+}
+
+/* ======= КУРС ВАЛЮТ ======= */
+.currency-box {
+max-width: 500px;
+background: #f9f9f9;
+padding: 25px;
+border-radius: 20px;
+margin: 30px 0;
+border: 1px solid #ddd;
+box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.currency-box label {
+display: block;
+margin-top: 15px;
+font-weight: bold;
+color: #333;
+}
+
+.currency-box input {
+width: 100%;
+padding: 10px;
+margin-top: 5px;
+border: 1px solid #ccc;
+border-radius: 10px;
+font-size: 16px;
+box-sizing: border-box;
+}
+
+.rate-info {
+background: #0a2f6c;
+color: white;
+padding: 12px;
+border-radius: 12px;
+text-align: center;
+font-size: 18px;
+font-weight: bold;
+margin-bottom: 20px;
+}
+
+.chart {
+display: flex;
+flex-direction: row;
+align-items: flex-end;
+justify-content: center;
+gap: 6px;
+margin-top: 30px;
+min-height: 250px;
+flex-wrap: wrap;
+}
+
+.bar {
+background-color: #0a2f6c;
+color: white;
+font-size: 11px;
+text-align: center;
+border-radius: 8px 8px 0 0;
+transition: 0.2s;
+cursor: pointer;
+padding-top: 5px;
+width: 35px;
+box-sizing: border-box;
+}
+
+.bar:hover {
+background-color: #ffb81c;
+transform: scale(1.05);
+}
+
+.bar.selected {
+background-color: #ffb81c;
+color: #0a2f6c;
+box-shadow: 0 0 8px #ffb81c;
+}
+
+.chart-tooltip {
+margin-top: 20px;
+padding: 10px;
+background: #f0f0f0;
+border-radius: 12px;
+text-align: center;
+font-size: 14px;
+border-left: 4px solid #ffb81c;
+}
+
+.other-rates {
+margin-top: 50px;
+padding: 20px;
+background: #f9f9f9;
+border-radius: 20px;
+border: 1px solid #ddd;
+}
+
+.rates-row {
+display: flex;
+flex-wrap: wrap;
+gap: 20px;
+justify-content: space-around;
+margin-top: 15px;
+}
+
+.rate-item {
+background: white;
+padding: 12px 20px;
+border-radius: 30px;
+font-weight: bold;
+color: #0a2f6c;
+box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+border-left: 4px solid #ffb81c;
+}
+
+.home {
+right: 275px;
+bottom: 25px;
+}
+
+
+/* 4 */
+contacts-box {
+background: #f9f9f9;
+padding: 25px;
+border-radius: 20px;
+margin-bottom: 30px;
+border: 1px solid #ddd;
+}
+
+.contacts-box h2 {
+color: #0a2f6c;
+margin-bottom: 15px;
+border-left: 5px solid #ffb81c;
+padding-left: 15px;
+}
+
+iframe {
+margin-top: 15px;
+border-radius: 16px;
+}
+
+/* 5 */
+.video-box {
+background: #f9f9f9;
+padding: 25px;
+border-radius: 20px;
+margin-bottom: 30px;
+border: 1px solid #ddd;
+box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.video-box h2 {
+color: #0a2f6c;
+margin-bottom: 15px;
+border-left: 5px solid #ffb81c;
+padding-left: 15px;
+}
+
+.video-description {
+margin-top: 15px;
+font-size: 14px;
+color: #555;
+line-height: 1.4;
+}
+
+iframe {
+border-radius: 16px;
+}

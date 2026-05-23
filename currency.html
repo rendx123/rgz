@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Банк ВТБ — Курс валют</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="menu">
+<ul>
+<li><a href="Index.html">О компании</a></li>
+<li><a href="news.html">Новости</a></li>
+<li><a href="currency.html">Курс валют</a></li>
+<li><a href="contacts.html">Контакты</a></li>
+<li><a href="video.html">Видео</a></li>
+</ul>
+</div>
+
+<div class="content">
+<h1>Курс валют</h1>
+<p><em>Турецкая лира (TRY) — калькулятор и динамика</em></p>
+
+<div class="currency-box">
+<h2>Калькулятор</h2>
+<div class="rate-info" id="rate-info"></div>
+
+<label>Рубли (RUB):</label>
+<input type="number" id="rub" value="1000" placeholder="Введите рубли">
+
+<label>Турецкие лиры (TRY):</label>
+<input type="number" id="try" value="0" placeholder="Введите лиры">
+</div>
+
+<div class="chart-box">
+<h2>Динамика курса за последние 30 дней</h2>
+<div class="chart" id="chart"></div>
+<div class="chart-tooltip" id="chart-tooltip">Кликните на столбец</div>
+</div>
+
+<div class="other-rates">
+<h3>КУРСЫ ВАЛЮТ</h3>
+<div class="rates-row">
+<div class="rate-item" id="usd-rate">USD: загрузка...</div>
+<div class="rate-item" id="eur-rate">EUR: загрузка...</div>
+<div class="rate-item" id="cny-rate">CNY: загрузка...</div>
+</div>
+</div>
+
+<a href="Index.html" class="up home">🏠 На главную</a>
+
+</div>
+
+<script>
+// Данные за 30 дней (учебные, но реалистичные)
+let dates = [];
+let rates = [];
+let today = new Date();
+
+for (let i = 0; i < 30; i++) {
+let d = new Date();
+d.setDate(today.getDate() - (29 - i));
+dates.push(d.getDate() + '.' + (d.getMonth() + 1));
+let baseRate = 15.5;
+let change = Math.sin(i * 0.3) * 1.2 + Math.random() * 0.5;
+rates.push(Number((baseRate + change).toFixed(2)));
+}
+
+// Получение реального курса для калькулятора и доп.валют
+async function getRate() {
+try {
+let response = await fetch('https://www.cbr-xml-daily.ru/daily_json.js');
+let data = await response.json();
+let rate = data.Valute.TRY.Value;
+document.getElementById('rate-info').innerHTML = '1 TRY = ' + rate.toFixed(2) + ' RUB';
+return rate;
+} catch (error) {
+document.getElementById('rate-info').innerHTML = '1 TRY = 15.50 RUB (примерно)';
+return 15.5;
+}
+}
+
+async function getExtraRates() {
+try {
+let response = await fetch('https://www.cbr-xml-daily.ru/daily_json.js');
+let data = await response.json();
+let usd = data.Valute.USD.Value;
+let eur = data.Valute.EUR.Value;
+let cny = data.Valute.CNY.Value;
+document.getElementById('usd-rate').innerHTML = `USD: ${usd.toFixed(2)} ₽`;
+document.getElementById('eur-rate').innerHTML = `EUR: ${eur.toFixed(2)} ₽`;
+document.getElementById('cny-rate').innerHTML = `CNY: ${cny.toFixed(2)} ₽`;
+} catch (error) {
+document.getElementById('usd-rate').innerHTML = 'USD: ошибка';
+document.getElementById('eur-rate').innerHTML = 'EUR: ошибка';
+document.getElementById('cny-rate').innerHTML = 'CNY: ошибка';
+}
+}
+
+let rubInput = document.getElementById('rub');
+let tryInput = document.getElementById('try');
+let currentRate = 0;
+
+getRate().then(rate => {
+currentRate = rate;
+updateFromRub();
+});
+getExtraRates();
+
+rubInput.addEventListener('input', updateFromRub);
+tryInput.addEventListener('input', updateFromTry);
+
+function updateFromRub() {
+let rub = parseFloat(rubInput.value);
+if (isNaN(rub)) rub = 0;
+let tryValue = rub / currentRate;
+tryInput.value = tryValue.toFixed(2);
+}
+
+function updateFromTry() {
+let tryValue = parseFloat(tryInput.value);
+if (isNaN(tryValue)) tryValue = 0;
+let rub = tryValue * currentRate;
+rubInput.value = rub.toFixed(2);
+}
+
+// Отрисовка графика
+function drawChart() {
+let chartDiv = document.getElementById('chart');
+if (!chartDiv) return;
+chartDiv.innerHTML = '';
+let maxRate = Math.max(...rates);
+
+for (let i = 0; i < rates.length; i++) {
+let barHeight = Math.max(30, (rates[i] / maxRate) * 150);
+let bar = document.createElement('div');
+bar.className = 'bar';
+bar.style.height = barHeight + 'px';
+bar.innerText = rates[i];
+
+bar.onclick = (function(index) {
+return function() {
+let tooltip = document.getElementById('chart-tooltip');
+if (tooltip) tooltip.innerHTML = '📅 ' + dates[index] + ' — курс: ' + rates[index] + ' ₽ за 1 TRY';
+let bars = document.querySelectorAll('.bar');
+bars.forEach(b => b.classList.remove('selected'));
+this.classList.add('selected');
+};
+})(i);
+
+chartDiv.appendChild(bar);
+}
+}
+
+drawChart();
+</script>
+
+</body>
+</html>
